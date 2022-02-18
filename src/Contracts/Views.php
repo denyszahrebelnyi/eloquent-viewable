@@ -24,7 +24,7 @@ interface Views
     /**
      * Record a view.
      */
-    public function record(): bool;
+    public function record(float $value = null): bool;
 
     /**
      * Destroy all views of the viewable model.

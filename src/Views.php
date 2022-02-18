@@ -105,7 +105,7 @@ class Views implements ViewsContract
      *
      * @throws \CyrildeWit\EloquentViewable\Exceptions\ViewRecordException
      */
-    public function record(): bool
+    public function record(float $value = null): bool
     {
         if ($this->viewable instanceof Viewable && $this->viewable->getKey() === null) {
             throw ViewRecordException::cannotRecordViewForViewableType();
@@ -240,7 +240,7 @@ class Views implements ViewsContract
      *
      * @return \CyrildeWit\EloquentViewable\Contracts\View
      */
-    protected function createView(): ViewContract
+    protected function createView(float $value = null): ViewContract
     {
         $view = Container::getInstance()->make(ViewContract::class);
 
@@ -249,6 +249,7 @@ class Views implements ViewsContract
             'viewable_type' => $this->viewable->getMorphClass(),
             'visitor' => $this->visitor->id(),
             'collection' => $this->collection,
+            'value' => $value,
             'viewed_at' => Carbon::now(),
         ]);
     }

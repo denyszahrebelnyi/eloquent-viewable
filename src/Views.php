@@ -115,7 +115,7 @@ class Views implements ViewsContract
             return false;
         }
 
-        event(new ViewRecorded($view = $this->createView()));
+        event(new ViewRecorded($view = $this->createView($value)));
 
         return $view->exists;
     }

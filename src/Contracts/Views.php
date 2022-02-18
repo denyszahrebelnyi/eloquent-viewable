@@ -22,6 +22,13 @@ interface Views
     public function count(): int;
 
     /**
+     * Get sum of views value
+     *
+     * @return float
+     */
+    public function valueSum(): float;
+
+    /**
      * Record a view.
      */
     public function record(float $value = null): bool;

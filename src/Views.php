@@ -100,6 +100,25 @@ class Views implements ViewsContract
         return $viewsCount;
     }
 
+    public function valueSum(): float
+    {
+        $query = $this->resolveViewableQuery();
+
+        $query->when($this->period, function ($query, $period) {
+            $query->withinPeriod($period);
+        });
+
+        $query->when($this->collection, function ($query, $collection) {
+            $query->collection($collection);
+        });
+
+        $query->when($this->unique, function ($query) {
+            $query->where(DB::raw('DISTINCT visitor'));
+        });
+
+        return (float) $query->sum('value');
+    }
+
     /**
      * Record a view for the viewable Eloquent model.
      *

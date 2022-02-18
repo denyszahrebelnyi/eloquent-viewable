@@ -1,9 +1,9 @@
 {
-    "name": "cyrildewit/eloquent-viewable",
+    "name": "denyszahrebelnyi/eloquent-viewable",
     "description": "Laravel package that allows you to associate views with Eloquent models",
     "type": "library",
     "license": "MIT",
-    "homepage": "https://github.com/cyrildewit/eloquent-viewable",
+    "homepage": "https://github.com/denyszahrebelnyi/eloquent-viewable",
     "keywords": [
         "laravel",
         "eloquent",

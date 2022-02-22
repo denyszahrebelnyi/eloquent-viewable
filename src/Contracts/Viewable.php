@@ -40,4 +40,9 @@ interface Viewable
      * Scope a query to order records by unique views count.
      */
     public function scopeOrderByUniqueViews(Builder $query, string $direction = 'desc', ?Period $period = null, ?string $collection = null, string $as = 'unique_views_count'): Builder;
+
+    /**
+     * Scope a query to order records by views count.
+     */
+    public function scopeRecentlyViewedBy(Builder $query, ?int $id = null, string $direction = 'desc', ?Period $period = null, ?string $collection = null): Builder;
 }

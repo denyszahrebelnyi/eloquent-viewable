@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @method static self|Builder orderByViews(string $direction = 'desc', $period = null, string $collection = null, bool $unique = false, $as = 'views_count')
+ * @method static self|Builder recentlyViewedBy(?int $id = null,string $direction = 'desc',?Period $period = null,?string $collection = null)
  * @method static self|Builder orderByUniqueViews(string $direction = 'desc', $period = null, string $collection = null, string $as = 'unique_views_count')
  **/
 trait InteractsWithViews
@@ -85,4 +86,31 @@ trait InteractsWithViews
             }
         }]);
     }
+
+    /**
+     * Scope a query to order records by views count for specific user.
+     */
+    public function scopeRecentlyViewedBy(
+        Builder $query,
+        ?int $id = null,
+        string $direction = 'desc',
+        ?Period $period = null,
+        ?string $collection = null
+    ): Builder {
+        // TODO rework with cache implementation
+        return $query->whereHas('views', function(Builder $query) use ($id, $period, $collection) {
+            if ($id) {
+                $query->where('user_id', $id);
+            }
+
+            if ($period) {
+                $query->withinPeriod($period);
+            }
+
+            if ($collection) {
+                $query->collection($collection);
+            }
+        });
+    }
 }
+
